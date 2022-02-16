@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../model/phrase.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key, required this.title}) : super(key: key);
@@ -59,9 +60,15 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
-  void _changePhrase() {
+  Future<void> _changePhrase() async {
+    final Uri uri = Uri(
+      scheme: "https",
+      host: "geomaps.altervista.org",
+      path: "/quotes/phrase.json",
+    );
+    final bool isConnected = await InternetConnectionChecker().hasConnection;
     setState(() {
-      ph.getPhraseFromJson();
+      (isConnected) ? ph.getPhraseFromJsonOnline(uri) : ph.getPhraseFromJson();
     });
   }
 }

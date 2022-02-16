@@ -55,6 +55,21 @@ class _MainPageState extends State<MainPage> {
               )
             ],
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: ElevatedButton(
+                  child: const Icon(Icons.photo_camera),
+                  onPressed: (() => {print("Pressed")}),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.black26,
+                  ),
+                ),
+              ),
+            ],
+          )
         ],
       ),
     );
